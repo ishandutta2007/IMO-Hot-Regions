@@ -38,13 +38,13 @@ axes[0].pie(continent_data['Avg_Score'], labels=continent_data['Continent'], aut
 axes[0].set_title('Average Relative Performance (Score/Country) by Continent')
 
 # Create a text string for the legend showing total medals
-legend_text = "Total Medals by Continent (G, S, B, HM):\n" + "-" * 40 + "\n"
+legend_text = "Total Medals (G, S, B, HM):\n" + "-" * 30 + "\n"
 for index, row in continent_data.iterrows():
-    legend_text += f"{row['Continent']}: {int(row['G'])}G, {int(row['S'])}S, {int(row['B'])}B, {int(row['HM'])}HM\n"
+    legend_text += f"{row['Continent']}: {int(row['G'])}G, {int(row['S'])}S, {int(row['B'])}B\n"
 
 # Add the legend as a text box to the pie chart axis
 props = dict(boxstyle='round,pad=0.5', facecolor='white', edgecolor='gray', alpha=0.8)
-axes[0].text(0.95, 0.7, legend_text, transform=axes[0].transAxes, fontsize=11,
+axes[0].text(0.95, 0.7, legend_text, transform=axes[0].transAxes, fontsize=10,
         verticalalignment='center', bbox=props, family='monospace')
 
 # 2. Heatmap - Average Medals per Country by Continent
