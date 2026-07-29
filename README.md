@@ -2,11 +2,13 @@
   <img src="assets/banner.svg" alt="IMO 2026 Banner" width="100%">
 </p>
 
-# 🏆 IMO 2026 - Regional Performance Analysis 🌍
+# 🏆 IMO 2026 - Regional Performance Analysis 🌍 | International Mathematical Olympiad Data Science
 
-This project analyzes the relative performance of different continents at the International Mathematical Olympiad (IMO) 2026. 📊 The data is provided in a CSV format and contains the medal counts (Gold 🥇, Silver 🥈, Bronze 🥉) and Honorable Mentions 🎖️ for each participating country.
+Welcome to the **IMO 2026 Regional Performance Analysis** repository! This open-source data science project provides a comprehensive statistical analysis of the relative performance of different continents at the **International Mathematical Olympiad (IMO) 2026**. 📊 
 
-## 🧮 Scoring Methodology
+Leveraging Python, Pandas, and Data Visualization techniques, this project analyzes the provided CSV dataset containing the global mathematical competition medal counts (Gold 🥇, Silver 🥈, Bronze 🥉) and Honorable Mentions 🎖️ for each participating country.
+
+## 🧮 Scoring Methodology & Data Analytics
 
 To fairly compare continents, this analysis uses a weighted points system to assess overall performance:
 *   🥇 **Gold Medal**: 5 points
