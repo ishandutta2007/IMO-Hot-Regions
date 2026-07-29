@@ -3,60 +3,82 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Read the data
-df = pd.read_csv('imo_2026_medals.csv')
+df = pd.read_csv("imo_2026_medals.csv")
 
 # Handle the typo in 'Continenet'
-if 'Continenet' in df.columns:
-    df.rename(columns={'Continenet': 'Continent'}, inplace=True)
+if "Continenet" in df.columns:
+    df.rename(columns={"Continenet": "Continent"}, inplace=True)
 
 # Group by continent to get total medals and number of countries
-continent_data = df.groupby('Continent').agg(
-    G=('G', 'sum'),
-    S=('S', 'sum'),
-    B=('B', 'sum'),
-    HM=('HM', 'sum'),
-    Country_Count=('Country', 'count')
-).reset_index()
+continent_data = (
+    df.groupby("Continent")
+    .agg(
+        G=("G", "sum"),
+        S=("S", "sum"),
+        B=("B", "sum"),
+        HM=("HM", "sum"),
+        Country_Count=("Country", "count"),
+    )
+    .reset_index()
+)
 
 # Calculate per-country averages for each medal type within the continent
-for col in ['G', 'S', 'B', 'HM']:
-    continent_data[f'Avg_{col}'] = continent_data[col] / continent_data['Country_Count']
+for col in ["G", "S", "B", "HM"]:
+    continent_data[f"Avg_{col}"] = continent_data[col] / continent_data["Country_Count"]
 
 # Calculate the average weighted score per country for each continent
 # Gold = 5, Silver = 3, Bronze = 1, HM = 0
-continent_data['Avg_Score'] = (
-    continent_data['Avg_G'] * 5 +
-    continent_data['Avg_S'] * 3 +
-    continent_data['Avg_B'] * 1
+continent_data["Avg_Score"] = (
+    continent_data["Avg_G"] * 5
+    + continent_data["Avg_S"] * 3
+    + continent_data["Avg_B"] * 1
 )
 
 # Set up the plot layout
 fig, axes = plt.subplots(1, 2, figsize=(18, 8))
 
 # 1. Pie Chart - Average Score by Continent
-axes[0].pie(continent_data['Avg_Score'], labels=continent_data['Continent'], autopct='%1.1f%%', startangle=140, colors=plt.cm.Pastel1.colors)
-axes[0].set_title('Average Relative Performance (Score/Country) by Continent')
+axes[0].pie(
+    continent_data["Avg_Score"],
+    labels=continent_data["Continent"],
+    autopct="%1.1f%%",
+    startangle=140,
+    colors=plt.cm.Pastel1.colors,
+)
+axes[0].set_title("Average Relative Performance (Score/Country) by Continent")
 
 # Create a text string for the legend showing total medals
 legend_text = "Total Medals (G, S, B, HM):\n" + "-" * 30 + "\n"
 for index, row in continent_data.iterrows():
-    legend_text += f"{row['Continent']}: {int(row['G'])}G, {int(row['S'])}S, {int(row['B'])}B\n"
+    legend_text += (
+        f"{row['Continent']}: {int(row['G'])}G, {int(row['S'])}S, {int(row['B'])}B\n"
+    )
 
 # Add the legend as a text box to the pie chart axis
-props = dict(boxstyle='round,pad=0.5', facecolor='white', edgecolor='gray', alpha=0.8)
-axes[0].text(0.95, 0.7, legend_text, transform=axes[0].transAxes, fontsize=10,
-        verticalalignment='center', bbox=props, family='monospace')
+props = dict(boxstyle="round,pad=0.5", facecolor="white", edgecolor="gray", alpha=0.8)
+axes[0].text(
+    0.95,
+    0.7,
+    legend_text,
+    transform=axes[0].transAxes,
+    fontsize=10,
+    verticalalignment="center",
+    bbox=props,
+    family="monospace",
+)
 
 # 2. Heatmap - Average Medals per Country by Continent
 # Set index to Continent for the heatmap
-heatmap_data = continent_data.set_index('Continent')[['Avg_G', 'Avg_S', 'Avg_B', 'Avg_HM']]
+heatmap_data = continent_data.set_index("Continent")[
+    ["Avg_G", "Avg_S", "Avg_B", "Avg_HM"]
+]
 sns.heatmap(heatmap_data, annot=True, fmt=".2f", cmap="YlGnBu", ax=axes[1])
-axes[1].set_title('Heatmap of Average Medals per Country')
-axes[1].set_xlabel('Award Type')
-axes[1].set_ylabel('Continent')
+axes[1].set_title("Heatmap of Average Medals per Country")
+axes[1].set_xlabel("Award Type")
+axes[1].set_ylabel("Continent")
 
 # Adjust layout to prevent overlap
 plt.subplots_adjust(wspace=0.6)
-plt.savefig('imo_2026_continent_performance.png', bbox_inches='tight', dpi=150)
+plt.savefig("imo_2026_continent_performance.png", bbox_inches="tight", dpi=150)
 plt.show()
 print("Plots saved to 'imo_2026_continent_performance.png'")
