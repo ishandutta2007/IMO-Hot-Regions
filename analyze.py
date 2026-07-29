@@ -31,11 +31,21 @@ continent_data['Avg_Score'] = (
 )
 
 # Set up the plot layout
-fig, axes = plt.subplots(1, 2, figsize=(16, 8))
+fig, axes = plt.subplots(1, 2, figsize=(18, 8))
 
 # 1. Pie Chart - Average Score by Continent
 axes[0].pie(continent_data['Avg_Score'], labels=continent_data['Continent'], autopct='%1.1f%%', startangle=140, colors=plt.cm.Pastel1.colors)
 axes[0].set_title('Average Relative Performance (Score/Country) by Continent')
+
+# Create a text string for the legend showing total medals
+legend_text = "Total Medals by Continent (G, S, B, HM):\n" + "-" * 40 + "\n"
+for index, row in continent_data.iterrows():
+    legend_text += f"{row['Continent']}: {int(row['G'])}G, {int(row['S'])}S, {int(row['B'])}B, {int(row['HM'])}HM\n"
+
+# Add the legend as a text box to the pie chart axis
+props = dict(boxstyle='round,pad=0.5', facecolor='white', edgecolor='gray', alpha=0.8)
+axes[0].text(1.15, 0.5, legend_text, transform=axes[0].transAxes, fontsize=11,
+        verticalalignment='center', bbox=props, family='monospace')
 
 # 2. Heatmap - Average Medals per Country by Continent
 # Set index to Continent for the heatmap
@@ -45,6 +55,7 @@ axes[1].set_title('Heatmap of Average Medals per Country')
 axes[1].set_xlabel('Award Type')
 axes[1].set_ylabel('Continent')
 
-plt.tight_layout()
-plt.savefig('imo_2026_continent_performance.png')
+# Adjust layout to prevent overlap
+plt.subplots_adjust(wspace=0.6)
+plt.savefig('imo_2026_continent_performance.png', bbox_inches='tight', dpi=150)
 print("Plots saved to 'imo_2026_continent_performance.png'")
