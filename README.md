@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/banner.svg" alt="IMO 2026 Banner" width="100%">
+</p>
+
 # IMO 2026 - Regional Performance Analysis
 
 This project analyzes the relative performance of different continents at the International Mathematical Olympiad (IMO) 2026. The data is provided in a CSV format and contains the medal counts (Gold, Silver, Bronze) and Honorable Mentions for each participating country.
