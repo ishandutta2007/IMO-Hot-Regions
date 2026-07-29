@@ -44,7 +44,7 @@ for index, row in continent_data.iterrows():
 
 # Add the legend as a text box to the pie chart axis
 props = dict(boxstyle='round,pad=0.5', facecolor='white', edgecolor='gray', alpha=0.8)
-axes[0].text(1.15, 0.5, legend_text, transform=axes[0].transAxes, fontsize=11,
+axes[0].text(0.95, 0.7, legend_text, transform=axes[0].transAxes, fontsize=11,
         verticalalignment='center', bbox=props, family='monospace')
 
 # 2. Heatmap - Average Medals per Country by Continent
@@ -58,4 +58,5 @@ axes[1].set_ylabel('Continent')
 # Adjust layout to prevent overlap
 plt.subplots_adjust(wspace=0.6)
 plt.savefig('imo_2026_continent_performance.png', bbox_inches='tight', dpi=150)
+plt.show()
 print("Plots saved to 'imo_2026_continent_performance.png'")
