@@ -79,6 +79,6 @@ axes[1].set_ylabel("Continent")
 
 # Adjust layout to prevent overlap
 plt.subplots_adjust(wspace=0.6)
-plt.savefig("imo_2026_continent_performance.png", bbox_inches="tight", dpi=150)
+plt.savefig("assets/imo_2026_continent_performance.png", bbox_inches="tight", dpi=150)
 plt.show()
-print("Plots saved to 'imo_2026_continent_performance.png'")
+print("Plots saved to 'assets/imo_2026_continent_performance.png'")

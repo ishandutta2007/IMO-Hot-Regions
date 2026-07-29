@@ -22,7 +22,7 @@ The analysis generates two primary visualizations:
 1.  **Pie Chart**: Shows the distribution of the average weighted score per country across continents.
 2.  **Heatmap**: Displays the average number of each award type (Gold, Silver, Bronze, HM) won per country for every continent.
 
-![Continent Performance](imo_2026_continent_performance.png)
+![Continent Performance](assets/imo_2026_continent_performance.png)
 
 ## How to Run
 
@@ -39,4 +39,4 @@ Run the analysis script to generate the updated plot:
 ```bash
 python analyze.py
 ```
-This will read from `imo_2026_medals.csv` and output/overwrite the `imo_2026_continent_performance.png` image.
+This will read from `imo_2026_medals.csv` and output/overwrite the `assets/imo_2026_continent_performance.png` image.
